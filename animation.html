@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <style>
+        body {
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 200px;
+            height: 200px;
+            filter: blur(2px);
+            background-color: rebeccapurple;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            box-shadow: 30px 30px 300px rebeccapurple;
+            animation: bg_color 1s linear infinite;
+            /* border: 5px solid green; */
+        }
+        @keyframes bg_color {
+            0% {
+                filter: blur(2px) hue-rotate(0deg);
+            }
+
+            100% {
+                filter: blur(2px) hue-rotate(360deg);
+            }
+        }
+
+        .child {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(204, 138, 138);
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            animation: bg_color2 500ms linear forwards;
+        }
+        @keyframes bg_color2 {
+            0% {
+                filter: blur(2px) hue-rotate(0deg);
+                transform: scale(1) translate(-50%, -50%);
+                opacity: 1;
+            }
+
+            100% {
+                filter: blur(2px) hue-rotate(360deg);
+                transform: scale(0) translate(-50%, -50%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container"></div>
+
+    <script>
+        let box = document.querySelector(".container");
+        window.addEventListener("mousemove", function (e) {
+            let child = document.createElement("div");
+            child.classList.add("child");
+            document.body.appendChild(child);
+            child.style.left = `${e.clientX}px`
+            child.style.top = `${e.clientY}px`
+            box.style.left = `${e.clientX}px`
+            box.style.top = `${e.clientY}px`
+        })
+    </script>
+</body>
+
+</html>
